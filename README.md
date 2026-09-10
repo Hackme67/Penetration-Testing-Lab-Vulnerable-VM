@@ -1,4 +1,4 @@
-# Penetration Testing Lab – Metasploitable 2 Assessment
+# Penetration Testing Lab – Metasploitable 2 
 
 **Authorized Security Testing Lab | Offensive Security | Vulnerability Assessment | Metasploit**
 
