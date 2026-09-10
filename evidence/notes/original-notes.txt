@@ -1,0 +1,64 @@
+Hacking into a VM
+
+
+1. Reconnaissance with Nmap
+
+Reconnaissance, the first phase in penetration testing, involves gathering information about the target system. This step identifies open ports and services, laying the foundation for further exploitation.
+
+Using Nmap to Scan the Target
+
+Output Analysis & Explanation: The scan provides a list of open ports and running services, such as FTP (port 21), SSH (port 22), Telnet (port 23), and HTTP (port 80). These services often have known vulnerabilities that attackers can exploit.
+
+2. Exploiting the FTP Backdoor Vulnerability in vsftpd
+
+Metasploitable 2 uses an outdated version of vsftpd (Very Secure FTP Daemon) with a backdoor vulnerability. Exploiting this can grant attackers shell access.
+
+Launch Metasploit Framework, Load the Payload, Set the Target IP and Run the Execution
+
+Explanation: This backdoor exploit triggers the vulnerability in vsftpd, creating a new session for the attacker. A successful attack results in shell access, allowing the attacker to execute commands on the target machine.
+
+Post-Exploitation:
+
+Navigating directories & Escalating privileges to ‘root’ users will give some more insightful information which can be exploited further.
+
+Why It’s Critical: FTP servers often contain sensitive files or credentials, and unauthorized shell access can be used to pivot to other systems in the network.
+
+3. Dumping Sensitive Information
+
+Sensitive information, such as password hashes, database credentials, and SSH keys, can be invaluable during an attack. Let’s explore how to extract this data.
+
+Extracting Password Hashes
+The /etc/shadow file contains password hashes for system users.
+
+Explanation: If these hashes are weakly encrypted or poorly secured, they can be cracked offline using tools like John the Ripper or Hashcat.
+
+4. Maintaining Persistence
+Persistence techniques ensure that attackers retain access to the compromised system even after a reboot or patch.
+
+Adding a Backdoor User
+Create a new user with administrative privileges.
+Explanation: This backdoor user can be used to regain access in the future, making it difficult for administrators to secure the system fully.
+
+5. Post-Exploitation Cleanup
+Leaving traces behind increases the risk of detection. Effective cleanup is a crucial step.
+
+Remove Backdoor Accounts
+
+6. Reporting and Mitigation
+Documenting vulnerabilities and suggesting remediation steps is vital for improving security.
+
+Example CVSS:
+
+vsftpd 2.3.4 Backdoor:
+
+Risk: Critical
+Recommendation: Update vsftpd to a secure version.
+Exposed Databases:
+
+Risk: High
+Recommendation: Encrypt credentials and limit access.
+Open Ports:
+
+Risk: High
+Recommendation: Close unnecessary ports and enable firewall rules.
+
